@@ -10,8 +10,8 @@ python = "^3.11"
 django = "^5.0.4"
 python-dotenv = "^1.0.1"
 dj-database-url = "^2.1.0"
-django-bootstrap4 = "^24.3"
 psycopg2-binary = "^2.9.9"
+django-bootstrap5 = "^24.2"
 
 
 [tool.poetry.group.dev.dependencies]
