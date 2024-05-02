@@ -17,6 +17,8 @@ whitenoise = "^6.6.0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "^7.0.0"
+django-extensions = "^3.2.3"
+bpython = "^0.24"
 
 [build-system]
 requires = ["poetry-core"]

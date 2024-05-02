@@ -6,3 +6,6 @@ start:
 
 lint:
 	poetry run flake8 .
+
+shell:
+	./manage.py shell_plus --bpython
