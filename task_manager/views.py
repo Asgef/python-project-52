@@ -19,16 +19,16 @@ class HomePageView(TemplateView):
 class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'users/user_form.html'
     form_class = AuthenticationForm
-    next_page = _('home_page')
+    next_page = 'home_page'
     success_message = _('You are logged in')
     extra_context = {
         'title': _('Login'),
-        'button_text': 'Enter',
+        'button_text': _('Enter'),
     }
 
 
 class UserLogoutView(SuccessMessageMixin, LogoutView):
-    next_page = _('home_page')
+    next_page = 'home_page'
     success_message = _('You are logged out')
 
     def dispatch(self, request, *args, **kwargs):

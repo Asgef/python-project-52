@@ -1,5 +1,6 @@
 from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
+from django.utils.translation import gettext as _
 from .forms import UserForm
 from .models import User
 from django.urls import reverse_lazy
@@ -19,11 +20,11 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
     template_name = 'users/user_form.html'
     form_class = UserForm
     model = User
-    success_url = reverse_lazy('home_page')
-    success_message = 'User is successfully registered'
+    success_url = reverse_lazy('login')
+    success_message = _('User is successfully registered')
     extra_context = {
-        'title': 'Registration',
-        'button_text': 'Register',
+        'title': _('Registration'),
+        'button_text': _('Register'),
     }
 
 
@@ -31,11 +32,11 @@ class UserEditView(SuccessMessageMixin, CreateView):
     template_name = 'users/user_form.html'
     form_class = UserForm
     model = User
-    success_url = reverse_lazy('home_page')
-    success_message = 'User is successfully update'
+    success_url = reverse_lazy('users')
+    success_message = _('User is successfully update')
     extra_context = {
-        'title': 'Edit user',
-        'button_text': 'Edit',
+        'title': _('Edit user'),
+        'button_text': _('Edit'),
     }
 
 
@@ -43,8 +44,8 @@ class UserDeleteView(SuccessMessageMixin, DeleteView):
     template_name = 'users/delete.html'
     model = User
     success_url = reverse_lazy('home_page')
-    success_message = 'User is successfully delete'
+    success_message = _('User is successfully delete')
     extra_context = {
-        'title': 'Delete user',
-        'button_text': 'Yes, delete',
+        'title': _('Delete user'),
+        'button_text': _('Yes, delete'),
     }
