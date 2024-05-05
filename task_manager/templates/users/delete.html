@@ -6,14 +6,13 @@
 
 {% block content %}
 
-
 <div class="container wrapper flex-grow-1">
     <h1 class="my-4">{{ title }}</h1>
 
     <form method="post">
-        {{ form }}
+        <p>{% translate 'Are you sure you want to delete' %} {{ user.first_name }} {{ user.last_name }}?</p>
         {% csrf_token %}
-        {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
+        {% bootstrap_button button_text button_type="submit" button_class="btn btn-danger" %}
     </form>
 
 </div>
