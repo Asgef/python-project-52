@@ -1,5 +1,8 @@
+from django.contrib.messages.views import SuccessMessageMixin
 from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
+from django.contrib.auth.views import LoginView, LogoutView
+from django.contrib.auth.forms import AuthenticationForm
 
 
 class HomePageView(TemplateView):
@@ -13,13 +16,20 @@ class HomePageView(TemplateView):
     }
 
 
-# class UserRegisterView(SuccessMessageMixin, CreateView):
-#     template_name = 'users/user_form.html'
-#     form_class = UserForm
-#     model = User
-#     success_url = reverse_lazy('home_page')
-#     success_message = 'User is successfully registered'
-#     extra_context = {
-#         'title': 'Registration',
-#         'button_text': 'Register',
-#     }
+class UserLoginView(SuccessMessageMixin, LoginView):
+    template_name = 'users/user_form.html'
+    form_class = AuthenticationForm
+    next_page = _('home_page')
+    success_message = _('You are logged in')
+    extra_context = {
+        'title': _('Login'),
+        'button_text': 'Enter',
+    }
+
+
+class UserLogoutView(SuccessMessageMixin, LogoutView):
+    next_page = _('home_page')
+    success_message = _('You are logged out')
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
