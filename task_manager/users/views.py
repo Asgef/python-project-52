@@ -46,7 +46,9 @@ class UserEditView(SuccessMessageMixin, CreateView):
         if user == request.user:
             return super().dispatch(request, *args, **kwargs)
 
-        messages.error(request, _("You do not have permission to change another user."))
+        messages.error(request, _(
+            "You do not have permission to change another user."
+        ))
         return HttpResponseRedirect(reverse('users'))
 
 
@@ -65,5 +67,7 @@ class UserDeleteView(SuccessMessageMixin, DeleteView):
         if user == request.user:
             return super().dispatch(request, *args, **kwargs)
 
-        messages.error(request, _("You do not have permission to change another user."))
+        messages.error(request, _(
+            "You do not have permission to change another user."
+        ))
         return HttpResponseRedirect(reverse('users'))
