@@ -1,9 +1,11 @@
+from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, DeleteView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from .forms import UserForm
 from .models import User
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
+from django.contrib import messages
 
 
 class UsersListView(ListView):
@@ -39,6 +41,14 @@ class UserEditView(SuccessMessageMixin, CreateView):
         'button_text': _('Edit'),
     }
 
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        if user == request.user:
+            return super().dispatch(request, *args, **kwargs)
+
+        messages.error(request, _("You do not have permission to change another user."))
+        return HttpResponseRedirect(reverse('users'))
+
 
 class UserDeleteView(SuccessMessageMixin, DeleteView):
     template_name = 'users/delete.html'
@@ -49,3 +59,11 @@ class UserDeleteView(SuccessMessageMixin, DeleteView):
         'title': _('Delete user'),
         'button_text': _('Yes, delete'),
     }
+
+    def dispatch(self, request, *args, **kwargs):
+        user = self.get_object()
+        if user == request.user:
+            return super().dispatch(request, *args, **kwargs)
+
+        messages.error(request, _("You do not have permission to change another user."))
+        return HttpResponseRedirect(reverse('users'))
