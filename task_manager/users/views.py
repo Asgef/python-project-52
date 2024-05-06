@@ -1,5 +1,5 @@
 from django.http import HttpResponseRedirect
-from django.views.generic import ListView, CreateView, DeleteView
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from .forms import UserForm
@@ -30,7 +30,7 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserEditView(SuccessMessageMixin, CreateView):
+class UserEditView(SuccessMessageMixin, UpdateView):
     template_name = 'users/user_form.html'
     form_class = UserForm
     model = User
@@ -55,7 +55,7 @@ class UserEditView(SuccessMessageMixin, CreateView):
 class UserDeleteView(SuccessMessageMixin, DeleteView):
     template_name = 'users/delete.html'
     model = User
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('users')
     success_message = _('User is successfully delete')
     extra_context = {
         'title': _('Delete user'),
