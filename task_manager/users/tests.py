@@ -25,7 +25,9 @@ class TestCreateUser(TestCase):
         url = reverse_lazy('create')
         response_get = self.client.get(url)
         self.assertEqual(response_get.status_code, 200)
-        self.assertTemplateUsed(response_get, template_name='users/user_form.html')
+        self.assertTemplateUsed(
+            response_get, template_name='users/user_form.html'
+        )
 
         response_post = self.client.post(url, self.data)
 
@@ -51,7 +53,9 @@ class TestUpdateUser(UserTestCase):
 
         response_get = self.client.get(url)
         self.assertEqual(response_get.status_code, 200)
-        self.assertTemplateUsed(response_get, template_name='users/user_form.html')
+        self.assertTemplateUsed(
+            response_get, template_name='users/user_form.html'
+        )
 
         response_post = self.client.post(url, new_data)
 
