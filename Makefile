@@ -8,7 +8,7 @@ start:
 	${MANAGE} runserver 0.0.0.0:8000
 
 lint:
-	poetry run flake8 .
+	poetry run flake8 task_manager --exclude migrations
 
 shell:
 	${MANAGE} shell_plus --bpython
