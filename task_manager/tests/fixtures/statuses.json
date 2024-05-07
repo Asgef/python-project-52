@@ -1,0 +1,26 @@
+[
+  {
+    "model": "auth.user",
+    "pk": 1,
+    "fields": {
+      "username": "Jedi",
+      "first_name": "John",
+      "last_name": "Doel",
+      "password": "12345tgb"
+    }
+  },
+  {
+    "model": "users.taskuser",
+    "pk": 1,
+    "fields": {
+    }
+  },
+  {
+     "model": "statuses.status",
+     "pk": 1,
+     "fields": {
+       "date_joined": "2024-05-07T12:38:12.579Z",
+       "name": "init"
+     }
+   }
+]

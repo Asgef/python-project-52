@@ -1,11 +1,9 @@
-from django.http import HttpResponseRedirect
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
 from .forms import UserForm
 from .models import User
-from django.urls import reverse_lazy, reverse
-from django.contrib import messages
+from django.urls import reverse_lazy
 from task_manager.mixins import AuthRequiredMixin
 from .mixins import UserPermissionMixin
 

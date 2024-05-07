@@ -14,5 +14,3 @@ class AuthRequiredMixin(LoginRequiredMixin):
             )
             return redirect(reverse_lazy('login'))
         return super().dispatch(request, *args, **kwargs)
-
-
