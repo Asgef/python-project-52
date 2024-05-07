@@ -25,3 +25,5 @@ test-coverage:
 	poetry run coverage report -m --include=task_manager/* --omit=task_manager/settings.py
 	poetry run coverage xml --include=task_manager/* --omit=task_manager/settings.py
 
+staticfiles:
+	${MANAGE} collectstatic --no-input
