@@ -18,6 +18,10 @@
 
     <ul class="navbar-nav">
         {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'statuses' %}">{% translate "Statuses" %}</a>
+        </li>
+
         <form action="{% url 'logout' %}" method="post">
           {% csrf_token %}
           <button type="submit" class="nav-link" style="border: none; background: none; text-decoration: none;">{% translate "Log Out" %}</button>
