@@ -1,11 +1,21 @@
+MANAGE := poetry run python3 manage.py
+
+
 install:
 	poetry install
 
 start:
-	python manage.py runserver 0.0.0.0:8000
+	${MANAGE} runserver 0.0.0.0:8000
 
 lint:
 	poetry run flake8 .
 
 shell:
-	./manage.py shell_plus --bpython
+	${MANAGE} shell_plus --bpython
+
+migrate:
+	${MANAGE} makemigrations
+	${MANAGE} migrate
+
+test:
+	poetry run python3 manage.py test
