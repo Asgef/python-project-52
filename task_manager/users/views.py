@@ -6,6 +6,8 @@ from .forms import UserForm
 from .models import User
 from django.urls import reverse_lazy, reverse
 from django.contrib import messages
+from task_manager.mixins import AuthRequiredMixin
+from .mixins import UserPermissionMixin
 
 
 class UsersListView(ListView):
@@ -29,8 +31,11 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
     }
 
 
-class UserEditView(SuccessMessageMixin, UpdateView):
+class UserEditView(
+    AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, UpdateView
+):
     template_name = 'users/user_form.html'
+    login_url = reverse_lazy('login')
     form_class = UserForm
     model = User
     success_url = reverse_lazy('users')
@@ -40,18 +45,20 @@ class UserEditView(SuccessMessageMixin, UpdateView):
         'button_text': _('Edit'),
     }
 
-    def dispatch(self, request, *args, **kwargs):
-        user = self.get_object()
-        if user == request.user:
-            return super().dispatch(request, *args, **kwargs)
+    # def dispatch(self, request, *args, **kwargs):
+    #     user = self.get_object()
+    #     if user == request.user:
+    #         return super().dispatch(request, *args, **kwargs)
+    #
+    #     messages.error(request, _(
+    #         "You do not have permission to change another user."
+    #     ))
+    #     return HttpResponseRedirect(reverse('users'))
 
-        messages.error(request, _(
-            "You do not have permission to change another user."
-        ))
-        return HttpResponseRedirect(reverse('users'))
 
-
-class UserDeleteView(SuccessMessageMixin, DeleteView):
+class UserDeleteView(
+    AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, DeleteView
+):
     template_name = 'users/delete.html'
     model = User
     success_url = reverse_lazy('users')
@@ -60,13 +67,3 @@ class UserDeleteView(SuccessMessageMixin, DeleteView):
         'title': _('Delete user'),
         'button_text': _('Yes, delete'),
     }
-
-    def dispatch(self, request, *args, **kwargs):
-        user = self.get_object()
-        if user == request.user:
-            return super().dispatch(request, *args, **kwargs)
-
-        messages.error(request, _(
-            "You do not have permission to change another user."
-        ))
-        return HttpResponseRedirect(reverse('users'))
