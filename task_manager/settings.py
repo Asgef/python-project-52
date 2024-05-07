@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'whitenoise.runserver_nostatic',
     'django_extensions',
     'task_manager.users',
+    'task_manager.statuses'
 ]
 
 MIDDLEWARE = [

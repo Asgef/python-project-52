@@ -45,16 +45,6 @@ class UserEditView(
         'button_text': _('Edit'),
     }
 
-    # def dispatch(self, request, *args, **kwargs):
-    #     user = self.get_object()
-    #     if user == request.user:
-    #         return super().dispatch(request, *args, **kwargs)
-    #
-    #     messages.error(request, _(
-    #         "You do not have permission to change another user."
-    #     ))
-    #     return HttpResponseRedirect(reverse('users'))
-
 
 class UserDeleteView(
     AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, DeleteView
