@@ -32,8 +32,8 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
 class UserEditView(
     AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, UpdateView
 ):
-    template_name = 'users/user_form.html'
     login_url = reverse_lazy('login')
+    template_name = 'users/user_form.html'
     form_class = UserForm
     model = User
     success_url = reverse_lazy('users')

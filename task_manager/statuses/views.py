@@ -1,5 +1,5 @@
 from task_manager.mixins import AuthRequiredMixin
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView
 from django.utils.translation import gettext_lazy as _
 from .models import Status
 from .forms import StatusForm
@@ -25,4 +25,18 @@ class StatusAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     extra_context = {
         'title': _('Create status'),
         'button_text': _('Create'),
+    }
+
+
+class StatusUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
+    login_url = reverse_lazy('login')
+    template_name = 'statuses/status_form.html'
+
+    form_class = StatusForm
+    model = Status
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status successfully changed')
+    extra_context = {
+        'title': _('Status change'),
+        'button_text': _('Change'),
     }

@@ -31,27 +31,28 @@ class StatusAddViewTest(StatusTestCase):
         self.assertEqual(new_status.name, 'New Status')
 
 
-# class UpdateStatus(StatusTestCase):
-#
-#     def test_update_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(
-#           reverse_lazy('status_update', kwargs={'pk': 1})
-#           )
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_update_status(self):
-#         response = self.client.get(
-#           reverse_lazy('status_update', kwargs={'pk': 1})
-#           )
-#         self.assertEqual(response.status_code, 200)
-#         response = self.client.post(
-#             reverse_lazy(
-#               'status_update', kwargs={'pk': 1}), {'name': 'Updated Status'}
-#         )
-#         self.assertEqual(response.status_code, 302)
-#         updated_status = Status.objects.get(pk=1)
-#         self.assertEqual(updated_status.name, 'Updated Status')
+class UpdateStatus(StatusTestCase):
+
+    def test_update_without_login(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse_lazy(
+                'status_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_update_status(self):
+        response = self.client.get(
+            reverse_lazy('status_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(
+            reverse_lazy(
+                'status_update', kwargs={'pk': 1}), {'name': 'Updated Status'}
+        )
+        self.assertEqual(response.status_code, 302)
+        updated_status = Status.objects.get(pk=1)
+        self.assertEqual(updated_status.name, 'Updated Status')
 #
 #
 # class DeleteStatus(StatusTestCase):
