@@ -9,11 +9,10 @@
 
 <div class="container wrapper flex-grow-1">
     <h1 class="my-4">{{ title }}</h1>
-    <p>CSRF Token: {{ csrf_token }}</p>
 
     <form method="post">
-        {% csrf_token %}
         {{ form }}
+        {% csrf_token %}
         {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
     </form>
 
