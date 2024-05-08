@@ -1,6 +1,6 @@
 from django.test import TestCase, Client
 from django.urls import reverse_lazy
-from .models import User
+from task_manager.users.models import User
 
 
 class UserTestCase(TestCase):

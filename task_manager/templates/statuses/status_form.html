@@ -11,8 +11,8 @@
     <h1 class="my-4">{{ title }}</h1>
 
     <form method="post">
-        {{ form }}
         {% csrf_token %}
+        {{ form }}
         {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
     </form>
 

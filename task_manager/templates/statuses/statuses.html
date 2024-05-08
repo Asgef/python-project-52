@@ -10,7 +10,7 @@
         {{ title }}
       </h1>
 
-      <a class="btn btn-primary mb-3" href="">{% trans 'Create status' %}</a>
+      <a class="btn btn-primary mb-3" href="{% url 'status_add' %}">{% trans 'Create status' %}</a>
 
         <table class="table table-striped">
           <thead class="thead-dark">
@@ -27,9 +27,9 @@
                 <td>{{ status.name }}</td>
                 <td>{{ user.created_at|date:"d.m.Y H:i" }}</td>
                 <td>
-                  <a href="{% url 'status_update' status.id %}">{% translate "Edit" %}</a>
+                  <a href=" url 'status_update' status.id ">{% translate "Edit" %}</a>
                   <br>
-                  <a href="{% url 'status_delete' status.id %}">{% translate "Delete" %}</a>
+                  <a href=" url 'status_delete' status.id ">{% translate "Delete" %}</a>
                 </td>
               </tr>
           {% endfor %}
