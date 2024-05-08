@@ -3,6 +3,7 @@ from django.contrib import messages
 from django.utils.translation import gettext as _
 from django.urls import reverse_lazy
 from django.shortcuts import redirect
+from django.db.models import ProtectedError
 
 
 class AuthRequiredMixin(LoginRequiredMixin):
@@ -14,3 +15,15 @@ class AuthRequiredMixin(LoginRequiredMixin):
             )
             return redirect(reverse_lazy('login'))
         return super().dispatch(request, *args, **kwargs)
+
+
+class DeleteProtectionMixin:
+    def post(self, request, *args, **kwargs):
+        try:
+            return super().post(request, *args, **kwargs)
+        except ProtectedError:
+            messages.error(
+                request,
+                _('It is not possible to delete a status because it is in use')
+            )
+            return redirect(reverse_lazy('login'))

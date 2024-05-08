@@ -53,21 +53,21 @@ class UpdateStatus(StatusTestCase):
         self.assertEqual(response.status_code, 302)
         updated_status = Status.objects.get(pk=1)
         self.assertEqual(updated_status.name, 'Updated Status')
-#
-#
-# class DeleteStatus(StatusTestCase):
-#
-#     def test_delete_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(
-#           reverse_lazy('status_delete', kwargs={'pk': 1})
-#           )
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_delete_status(self):
-#         initial_count = Status.objects.count()
-#         response = self.client.post(
-#           reverse_lazy('status_delete', kwargs={'pk': 1})
-#           )
-#         self.assertEqual(response.status_code, 302)
-#         self.assertEqual(Status.objects.count(), initial_count - 1)
+
+
+class DeleteStatus(StatusTestCase):
+
+    def test_delete_without_login(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse_lazy('status_delete', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_status(self):
+        initial_count = Status.objects.count()
+        response = self.client.post(
+            reverse_lazy('status_delete', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Status.objects.count(), initial_count - 1)

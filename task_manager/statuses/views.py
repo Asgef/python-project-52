@@ -1,5 +1,5 @@
-from task_manager.mixins import AuthRequiredMixin
-from django.views.generic import ListView, CreateView, UpdateView
+from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 from .models import Status
 from .forms import StatusForm
@@ -39,4 +39,17 @@ class StatusUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {
         'title': _('Status change'),
         'button_text': _('Change'),
+    }
+
+
+class StatusDeleteView(
+    AuthRequiredMixin, DeleteProtectionMixin, SuccessMessageMixin, DeleteView
+):
+    template_name = 'statuses/delete.html'
+    model = Status
+    success_url = reverse_lazy('statuses')
+    success_message = _('Status successfully delete')
+    extra_context = {
+        'title': _('Delete status'),
+        'button_text': _('Yes, delete'),
     }
