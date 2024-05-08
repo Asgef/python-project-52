@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'task_manager.users',
     'task_manager.statuses',
+    'task_manager.tasks',
 ]
 
 MIDDLEWARE = [
