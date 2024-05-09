@@ -1,4 +1,4 @@
-from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
+from task_manager.mixins import AuthRequiredMixin, AuthorDeletionMixin
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 from .models import Task
@@ -19,8 +19,8 @@ class TasksListView(AuthRequiredMixin, ListView):
 
 class TaskAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
-    form_class = TaskForm
     template_name = 'layouts/form.html'
+    form_class = TaskForm
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully created')
     extra_context = {
@@ -35,9 +35,9 @@ class TaskAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class TaskUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
+    model = Task
     template_name = 'layouts/form.html'
     form_class = TaskForm
-    model = Task
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully changed')
     extra_context = {
@@ -47,10 +47,10 @@ class TaskUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
 
 
 class TaskDeleteView(
-    AuthRequiredMixin, DeleteProtectionMixin, SuccessMessageMixin, DeleteView
+    AuthRequiredMixin, AuthorDeletionMixin, SuccessMessageMixin, DeleteView
 ):
-    template_name = 'layouts/delete.html'
     model = Task
+    template_name = 'layouts/delete.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully delete')
     author_message = _('The task can be deleted only by its author')
