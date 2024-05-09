@@ -11,22 +11,8 @@
   },
   {
     "model": "users.user",
-    "pk": 2,
+    "pk": 1,
     "fields": {
-      "username": "Sith",
-      "first_name": "Jane",
-      "last_name": "Smith",
-      "password": "qwerty123"
-    }
-  },
-  {
-    "model": "users.user",
-    "pk": 3,
-    "fields": {
-      "username": "Padawan",
-      "first_name": "Luke",
-      "last_name": "Skywalker",
-      "password": "password456"
     }
   }
 ]
