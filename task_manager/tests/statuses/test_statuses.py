@@ -2,7 +2,6 @@ from task_manager.users.models import User
 from django.urls import reverse_lazy
 from django.test import TestCase
 from task_manager.statuses.models import Status
-# from django.contrib.auth import get_user_model
 
 
 class StatusTestCase(TestCase):
@@ -13,7 +12,7 @@ class StatusTestCase(TestCase):
         self.client.force_login(self.user)
 
 
-class StatusAddViewTest(StatusTestCase):
+class TestAddStatus(StatusTestCase):
 
     def test_open_without_login(self):
         self.client.logout()
@@ -31,7 +30,7 @@ class StatusAddViewTest(StatusTestCase):
         self.assertEqual(new_status.name, 'New Status')
 
 
-class UpdateStatus(StatusTestCase):
+class TestUpdateStatus(StatusTestCase):
 
     def test_update_without_login(self):
         self.client.logout()
@@ -55,7 +54,7 @@ class UpdateStatus(StatusTestCase):
         self.assertEqual(updated_status.name, 'Updated Status')
 
 
-class DeleteStatus(StatusTestCase):
+class TestDeleteStatus(StatusTestCase):
 
     def test_delete_without_login(self):
         self.client.logout()

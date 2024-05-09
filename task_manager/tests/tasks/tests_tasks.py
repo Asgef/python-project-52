@@ -1,3 +1,75 @@
+# from task_manager.users.models import User
+# from django.urls import reverse_lazy
 # from django.test import TestCase
+# from task_manager.tasks.models import Task
 #
-# # Create your tests here.
+#
+# class StatusTestCase(TestCase):
+#     fixtures = ['task.json']
+#
+#     def setUp(self):
+#         self.user = User.objects.get(pk=1)
+#         self.client.force_login(self.user)
+#
+#
+# class TestAddTask(StatusTestCase):
+#
+#     def test_open_without_login(self):
+#         self.client.logout()
+#         response = self.client.get(reverse_lazy('tasks'))
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_create_status(self):
+#         initial_count = Task.objects.count()
+#         response = self.client.post(
+#             reverse_lazy('task_add'), {'name': 'New Task'}
+#         )
+#         self.assertEqual(response.status_code, 302)
+#         self.assertEqual(Task.objects.count(), initial_count + 1)
+#
+#         new_status = Task.objects.latest('id')
+#         self.assertEqual(new_status.name, 'New Task')
+#
+
+# class TestUpdateStatus(StatusTestCase):
+#
+#     def test_update_without_login(self):
+#         self.client.logout()
+#         response = self.client.get(
+#             reverse_lazy(
+#                 'task_update', kwargs={'pk': 1})
+#         )
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_update_status(self):
+#         response = self.client.get(
+#             reverse_lazy('task_update', kwargs={'pk': 1})
+#         )
+#         self.assertEqual(response.status_code, 200)
+#
+#         response = self.client.post(
+#             reverse_lazy(
+#                 'task_update', kwargs={'pk': 1}), {'name': 'Updated Status'}
+#         )
+#         self.assertEqual(response.status_code, 302)
+#
+#         updated_status = Task.objects.get(pk=1)
+#         self.assertEqual(updated_status.name, 'Updated Task')
+#
+#
+# class TestDeleteStatus(StatusTestCase):
+#
+#     def test_delete_without_login(self):
+#         self.client.logout()
+#         response = self.client.get(
+#             reverse_lazy('Task_delete', kwargs={'pk': 1})
+#         )
+#         self.assertEqual(response.status_code, 302)
+#
+#     def test_delete_status(self):
+#         initial_count = Task.objects.count()
+#         response = self.client.post(
+#             reverse_lazy('task_delete', kwargs={'pk': 1})
+#         )
+#         self.assertEqual(response.status_code, 302)
+#         self.assertEqual(Task.objects.count(), initial_count - 1)

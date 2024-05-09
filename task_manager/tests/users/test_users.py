@@ -79,7 +79,7 @@ class TestDeleteUser(UserTestCase):
     def test_delete_without_login(self):
         self.client.logout()
         response = self.client.get(
-            reverse_lazy('status_delete', kwargs={'pk': 1})
+            reverse_lazy('user_delete', kwargs={'pk': 1})
         )
         self.assertEqual(response.status_code, 302)
 

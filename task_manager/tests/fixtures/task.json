@@ -28,7 +28,7 @@
     "pk": 1,
     "fields": {
       "name": "Test task",
-      "date_joined": "2024-05-07T12:38:12.579Z",
+      "created_at": "2024-05-07T12:38:12.579Z",
       "author": 1,
       "status": 1,
       "executor": 1
