@@ -1,35 +1,43 @@
-# from task_manager.users.models import User
-# from django.urls import reverse_lazy
-# from django.test import TestCase
-# from task_manager.tasks.models import Task
-#
-#
-# class StatusTestCase(TestCase):
-#     fixtures = ['task.json']
-#
-#     def setUp(self):
-#         self.user = User.objects.get(pk=1)
-#         self.client.force_login(self.user)
-#
-#
-# class TestAddTask(StatusTestCase):
-#
-#     def test_open_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(reverse_lazy('tasks'))
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_create_status(self):
-#         initial_count = Task.objects.count()
-#         response = self.client.post(
-#             reverse_lazy('task_add'), {'name': 'New Task'}
-#         )
-#         self.assertEqual(response.status_code, 302)
-#         self.assertEqual(Task.objects.count(), initial_count + 1)
-#
-#         new_status = Task.objects.latest('id')
-#         self.assertEqual(new_status.name, 'New Task')
-#
+from task_manager.users.models import User
+from django.urls import reverse_lazy
+from django.test import TestCase
+from task_manager.tasks.models import Task
+
+
+class StatusTestCase(TestCase):
+    fixtures = ['task.json']
+
+    def setUp(self):
+        self.user = User.objects.get(pk=1)
+        self.client.force_login(self.user)
+
+
+class TestAddTask(StatusTestCase):
+
+    data = {
+        'name': "New test task",
+        'description': 'Description new test task',
+        'status': 1,
+        'executor': 1
+    }
+
+    def test_open_without_login(self):
+        self.client.logout()
+        response = self.client.get(reverse_lazy('tasks'))
+        self.assertEqual(response.status_code, 302)
+
+    def test_create_status(self):
+        initial_count = Task.objects.count()
+        response = self.client.post(
+            reverse_lazy('task_add'), self.data
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Task.objects.count(), initial_count + 1)
+
+        new_status = Task.objects.latest('id')
+        self.assertEqual(new_status.name, self.data['name'])
+        self.assertEqual(new_status.description, self.data['description'])
+
 
 # class TestUpdateStatus(StatusTestCase):
 #
