@@ -4,7 +4,7 @@ from django.test import TestCase
 from task_manager.tasks.models import Task
 
 
-class StatusTestCase(TestCase):
+class TaskTestCase(TestCase):
     fixtures = ['task.json']
 
     def setUp(self):
@@ -12,7 +12,7 @@ class StatusTestCase(TestCase):
         self.client.force_login(self.user)
 
 
-class TestAddTask(StatusTestCase):
+class TestAddTask(TaskTestCase):
 
     data = {
         'name': "New test task",
@@ -39,7 +39,7 @@ class TestAddTask(StatusTestCase):
         self.assertEqual(new_status.description, self.data['description'])
 
 
-class TestUpdateStatus(StatusTestCase):
+class TestUpdateTasks(TaskTestCase):
 
     data = {
         'name': "Updated test task",
@@ -72,21 +72,20 @@ class TestUpdateStatus(StatusTestCase):
         self.assertEqual(updated_status.name, self.data['name'])
         self.assertEqual(updated_status.description, self.data['description'])
 
-#
-#
-# class TestDeleteStatus(StatusTestCase):
-#
-#     def test_delete_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(
-#             reverse_lazy('Task_delete', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_delete_status(self):
-#         initial_count = Task.objects.count()
-#         response = self.client.post(
-#             reverse_lazy('task_delete', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 302)
-#         self.assertEqual(Task.objects.count(), initial_count - 1)
+
+class TestDeleteTask(TaskTestCase):
+
+    def test_delete_without_login(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse_lazy('task_delete', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_delete_status(self):
+        initial_count = Task.objects.count()
+        response = self.client.post(
+            reverse_lazy('task_delete', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+        self.assertEqual(Task.objects.count(), initial_count - 1)
