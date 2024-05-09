@@ -18,7 +18,7 @@ class UsersListView(ListView):
 
 
 class UserRegisterView(SuccessMessageMixin, CreateView):
-    template_name = 'users/user_form.html'
+    template_name = 'layouts/form.html'
     form_class = UserForm
     model = User
     success_url = reverse_lazy('login')
@@ -32,7 +32,7 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
 class UserEditView(
     AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, UpdateView
 ):
-    template_name = 'users/user_form.html'
+    template_name = 'layouts/form.html'
     form_class = UserForm
     model = User
     success_url = reverse_lazy('users')
@@ -46,7 +46,7 @@ class UserEditView(
 class UserDeleteView(
     AuthRequiredMixin, UserPermissionMixin, SuccessMessageMixin, DeleteView
 ):
-    template_name = 'users/delete.html'
+    template_name = 'layouts/delete.html'
     model = User
     success_url = reverse_lazy('users')
     success_message = _('User is successfully delete')

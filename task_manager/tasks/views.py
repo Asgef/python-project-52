@@ -20,7 +20,7 @@ class TasksListView(AuthRequiredMixin, ListView):
 class TaskAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
     model = Task
     form_class = TaskForm
-    template_name = 'tasks/task_form.html'
+    template_name = 'layouts/form.html'
     success_url = reverse_lazy('tasks')
     success_message = _('Task successfully created')
     extra_context = {
@@ -35,7 +35,7 @@ class TaskAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class TaskUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
-    template_name = 'tasks/task_form.html'
+    template_name = 'layouts/form.html'
     form_class = TaskForm
     model = Task
     success_url = reverse_lazy('tasks')

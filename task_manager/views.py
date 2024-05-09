@@ -17,7 +17,7 @@ class HomePageView(TemplateView):
 
 
 class UserLoginView(SuccessMessageMixin, LoginView):
-    template_name = 'users/user_form.html'
+    template_name = 'layouts/form.html'
     form_class = AuthenticationForm
     next_page = 'home_page'
     success_message = _('You are logged in')
