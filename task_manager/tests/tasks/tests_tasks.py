@@ -39,30 +39,39 @@ class TestAddTask(StatusTestCase):
         self.assertEqual(new_status.description, self.data['description'])
 
 
-# class TestUpdateStatus(StatusTestCase):
-#
-#     def test_update_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(
-#             reverse_lazy(
-#                 'task_update', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_update_status(self):
-#         response = self.client.get(
-#             reverse_lazy('task_update', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 200)
-#
-#         response = self.client.post(
-#             reverse_lazy(
-#                 'task_update', kwargs={'pk': 1}), {'name': 'Updated Status'}
-#         )
-#         self.assertEqual(response.status_code, 302)
-#
-#         updated_status = Task.objects.get(pk=1)
-#         self.assertEqual(updated_status.name, 'Updated Task')
+class TestUpdateStatus(StatusTestCase):
+
+    data = {
+        'name': "Updated test task",
+        'description': 'Description updated test task',
+        'status': 1,
+        'executor': 1
+    }
+
+    def test_update_without_login(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse_lazy(
+                'task_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_update_status(self):
+        response = self.client.get(
+            reverse_lazy('task_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 200)
+
+        response = self.client.post(
+            reverse_lazy(
+                'task_update', kwargs={'pk': 1}), self.data
+        )
+        self.assertEqual(response.status_code, 302)
+
+        updated_status = Task.objects.get(pk=1)
+        self.assertEqual(updated_status.name, self.data['name'])
+        self.assertEqual(updated_status.description, self.data['description'])
+
 #
 #
 # class TestDeleteStatus(StatusTestCase):

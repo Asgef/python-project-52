@@ -33,7 +33,7 @@
                 <td>{{ task.executor }}</td>
                 <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
                 <td>
-                  <a href=" url 'status_update' task.id %}">{% translate "Edit" %}</a>
+                  <a href=" {% url 'task_update' task.id %}">{% translate "Edit" %}</a>
                   <br>
                   <a href=" url 'status_delete' task.id %}">{% translate "Delete" %}</a>
                 </td>

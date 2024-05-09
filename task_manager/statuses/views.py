@@ -29,9 +29,7 @@ class StatusAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
 
 
 class StatusUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
-    login_url = reverse_lazy('login')
     template_name = 'statuses/status_form.html'
-
     form_class = StatusForm
     model = Status
     success_url = reverse_lazy('statuses')
