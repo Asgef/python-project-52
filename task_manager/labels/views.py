@@ -15,3 +15,15 @@ class LabelListView(AuthRequiredMixin, ListView):
     extra_context = {
         'title': _('Labels')
     }
+
+
+class LabelAddView(AuthRequiredMixin, SuccessMessageMixin, CreateView):
+    model = Label
+    template_name = 'layouts/form.html'
+    form_class = LabelForm
+    success_message = _('Label successfully created')
+    success_url = reverse_lazy('labels')
+    extra_context = {
+        'title': _('Create label'),
+        'button_text': _('Create'),
+    }

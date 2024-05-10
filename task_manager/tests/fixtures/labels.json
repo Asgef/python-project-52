@@ -1,0 +1,26 @@
+[
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+      "username": "Jedi",
+      "first_name": "John",
+      "last_name": "Doel",
+      "password": "12345tgb"
+    }
+  },
+  {
+    "model": "users.user",
+    "pk": 1,
+    "fields": {
+    }
+  },
+  {
+     "model": "labels.label",
+     "pk": 1,
+     "fields": {
+       "created_at": "2024-05-07T12:38:12.579Z",
+       "name": "init"
+     }
+   }
+]
