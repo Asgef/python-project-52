@@ -1,11 +1,10 @@
-from task_manager.mixins import AuthRequiredMixin  # AuthorDeletionMixin
-from django.views.generic import ListView, CreateView, UpdateView  # DeleteView
+from task_manager.mixins import AuthRequiredMixin, DeleteProtectionMixin
+from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 from .models import Label
 from .forms import LabelForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
-# from task_manager.users.models import User
 
 
 class LabelListView(AuthRequiredMixin, ListView):
@@ -38,4 +37,21 @@ class LabelUpdateView(AuthRequiredMixin, SuccessMessageMixin, UpdateView):
     extra_context = {
         'title': _('Change label'),
         'button_text': _('Change'),
+    }
+
+
+class LabelDeleteView(
+    AuthRequiredMixin, DeleteProtectionMixin, SuccessMessageMixin, DeleteView
+):
+    model = Label
+    template_name = 'layouts/delete.html'
+    success_message = _('Label successfully delete')
+    success_url = reverse_lazy('labels')
+    protected_message = _(
+        'It is not possible to delete a label because it is in use'
+    )
+    protected_url = reverse_lazy('labels')
+    extra_context = {
+        'title': _('Delete label'),
+        'button_text': _('Yes, delete'),
     }
