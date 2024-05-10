@@ -30,28 +30,28 @@ class TestAddLabel(LabelTestCase):
         self.assertEqual(new_status.name, 'New Label')
 
 
-# class TestUpdateLabel(LabelTestCase):
-#
-#     def test_update_without_login(self):
-#         self.client.logout()
-#         response = self.client.get(
-#             reverse_lazy(
-#                 'label_update', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 302)
-#
-#     def test_update_label(self):
-#         response = self.client.get(
-#             reverse_lazy('label_update', kwargs={'pk': 1})
-#         )
-#         self.assertEqual(response.status_code, 200)
-#         response = self.client.post(
-#             reverse_lazy(
-#                 'label_update', kwargs={'pk': 1}), {'name': 'Updated Label'}
-#         )
-#         self.assertEqual(response.status_code, 302)
-#         updated_status = Label.objects.get(pk=1)
-#         self.assertEqual(updated_status.name, 'Updated Label')
+class TestUpdateLabel(LabelTestCase):
+
+    def test_update_without_login(self):
+        self.client.logout()
+        response = self.client.get(
+            reverse_lazy(
+                'label_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 302)
+
+    def test_update_label(self):
+        response = self.client.get(
+            reverse_lazy('label_update', kwargs={'pk': 1})
+        )
+        self.assertEqual(response.status_code, 200)
+        response = self.client.post(
+            reverse_lazy(
+                'label_update', kwargs={'pk': 1}), {'name': 'Updated Label'}
+        )
+        self.assertEqual(response.status_code, 302)
+        updated_status = Label.objects.get(pk=1)
+        self.assertEqual(updated_status.name, 'Updated Label')
 #
 #
 # class TestDeleteLabel(LabelTestCase):
