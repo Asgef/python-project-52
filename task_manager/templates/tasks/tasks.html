@@ -1,4 +1,5 @@
 {% extends "layouts/base.html" %}
+{% load django_bootstrap5 %}
 {% load i18n %}
 
 {% block title %}{% translate "Task Manager" %} Hexlet{% endblock %}
@@ -6,11 +7,11 @@
 {% block content %}
     <div class="container wrapper flex-grow-1">
 
-      <h1 class="my-4">
-        {{ title }}
-      </h1>
+      <h1 class="my-4">{{ title }}</h1>
 
       <a class="btn btn-primary mb-3" href="{% url 'task_add' %}">{% trans 'Create task' %}</a>
+
+      {% include 'tasks/filter.html' %}
 
         <table class="table table-striped">
           <thead class="thead-dark">
@@ -24,23 +25,23 @@
             </tr>
           </thead>
           <tbody>
-          {% for task in tasks %}
-              <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.name }}</td>
-                <td>{{ task.status }}</td>
-                <td>{{ task.author }}</td>
-                <td>{{ task.executor }}</td>
-                <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
-                <td>
-                  <a href="{% url 'task_update' task.id %}">{% translate "Edit" %}</a>
-                  <br>
-                  <a href="{% url 'task_delete' task.id %}">{% translate "Delete" %}</a>
-                </td>
-              </tr>
-          {% endfor %}
+            {% for task in tasks %}
+                <tr>
+                  <td>{{ task.id }}</td>
+                  <td>{{ task.name }}</td>
+                  <td>{{ task.status }}</td>
+                  <td>{{ task.author }}</td>
+                  <td>{{ task.executor }}</td>
+                  <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
+                  <td>
+                    <a href="{% url 'task_update' task.id %}">{% translate "Edit" %}</a>
+                    <br>
+                    <a href="{% url 'task_delete' task.id %}">{% translate "Delete" %}</a>
+                  </td>
+                </tr>
+            {% endfor %}
           </tbody>
         </table>
     </div>
 
-{% endblock %}
+{% endblock content%}

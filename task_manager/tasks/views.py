@@ -6,14 +6,18 @@ from .forms import TaskForm
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from task_manager.users.models import User
+from .filters import TaskFilter
+from django_filters.views import FilterView
 
 
-class TasksListView(AuthRequiredMixin, ListView):
+class TasksListView(AuthRequiredMixin, FilterView, ListView):
     model = Task
     template_name = 'tasks/tasks.html'
+    filterset_class = TaskFilter
     context_object_name = 'tasks'
     extra_context = {
-        'title': _('Tasks')
+        'title': _('Tasks'),
+        'button_text': _('Show')
     }
 
 
