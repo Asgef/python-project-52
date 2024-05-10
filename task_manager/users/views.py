@@ -12,6 +12,7 @@ from task_manager.mixins import (
 class UsersListView(ListView):
     model = User
     template_name = 'users/users.html'
+    context_object_name = 'users'
     extra_context = {
         'title': _('Users')
     }
@@ -21,8 +22,8 @@ class UserRegisterView(SuccessMessageMixin, CreateView):
     model = User
     template_name = 'layouts/form.html'
     form_class = UserForm
-    success_url = reverse_lazy('login')
     success_message = _('User is successfully registered')
+    success_url = reverse_lazy('login')
     extra_context = {
         'title': _('Registration'),
         'button_text': _('Register'),
@@ -35,8 +36,8 @@ class UserEditView(
     model = User
     template_name = 'layouts/form.html'
     form_class = UserForm
-    success_url = reverse_lazy('users')
     success_message = _('User is successfully update')
+    success_url = reverse_lazy('users')
     permission_message = _('You have no rights to change another user.')
     permission_url = reverse_lazy('users')
     extra_context = {
@@ -46,7 +47,7 @@ class UserEditView(
 
 
 class UserDeleteView(AuthRequiredMixin, UserPermissionMixin,
-                     SuccessMessageMixin, DeleteView, DeleteProtectionMixin):
+                     DeleteProtectionMixin, SuccessMessageMixin, DeleteView):
     model = User
     template_name = 'layouts/delete.html'
     success_url = reverse_lazy('users')

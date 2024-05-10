@@ -18,12 +18,14 @@ class AuthRequiredMixin(LoginRequiredMixin):
 
 
 class DeleteProtectionMixin:
+    protected_message = None
+    protected_url = None
+
     def post(self, request, *args, **kwargs):
         try:
             return super().post(request, *args, **kwargs)
         except ProtectedError:
-            messages.error(
-                request, self.protected_message)
+            messages.error(request, self.protected_message)
             return redirect(self.protected_url)
 
 
@@ -46,8 +48,8 @@ class AuthorDeletionMixin(UserPermissionMixin):
     author_url = None
 
     def test_func(self):
-        return self.get_object() == self.request.user
+        return self.get_object().author == self.request.user
 
     def handle_no_permission(self):
         messages.error(self.request, self.author_message)
-        return redirect(reverse_lazy(self.author_url))
+        return redirect(self.author_url)
