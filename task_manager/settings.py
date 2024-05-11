@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.0/ref/settings/
 """
-
+import logging
 import os
 import dj_database_url
 from pathlib import Path
@@ -154,3 +154,29 @@ CSRF_TRUSTED_ORIGINS = ['https://*.onrender.com']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 FIXTURE_DIRS = ('task_manager/tests/fixtures/',)
+
+# LOGGING = {
+#     'version': 1,
+#     'disable_existing_loggers': False,
+#
+#     'formatters': {
+#         'main_format': {
+#             'format': "[{module} {asctime} {levelname}] {message}",
+#             "style": "{",
+#         },
+#     },
+#     'handlers': {
+#         'file': {
+#             'class': 'logging.FileHandler',
+#             'formatter': 'main_format',
+#             'filename': os.path.join(BASE_DIR, "info.log"),
+#         },
+#     },
+#     'loggers': {
+#         'main': {
+#             'handlers': ['file'],
+#             'level': 'DEBUG',
+#             'propagate': True,
+#         },
+#     },
+# }

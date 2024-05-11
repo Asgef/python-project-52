@@ -1,3 +1,4 @@
+from django.contrib.auth import login
 from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from django.contrib.messages.views import SuccessMessageMixin
 from django.utils.translation import gettext as _
@@ -7,6 +8,9 @@ from django.urls import reverse_lazy
 from task_manager.mixins import (
     AuthRequiredMixin, UserPermissionMixin, DeleteProtectionMixin
 )
+# import logging
+#
+# logger = logging.getLogger('main')
 
 
 class UsersListView(ListView):
@@ -44,6 +48,12 @@ class UserEditView(
         'title': _('Edit user'),
         'button_text': _('Edit'),
     }
+
+    def form_valid(self, form):
+        response = super().form_valid(form)
+        self.request.user = form.save()
+        login(self.request, self.request.user, backend='django.contrib.auth.backends.ModelBackend')
+        return response
 
 
 class UserDeleteView(AuthRequiredMixin, UserPermissionMixin,

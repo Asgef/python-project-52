@@ -8,6 +8,7 @@ coverage.xml
 .pytest_cache/
 .idea/
 .env
+*.log
 
 *.ipynb
 db.sqlite3

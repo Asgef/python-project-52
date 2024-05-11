@@ -3,6 +3,8 @@ from django.views.generic import TemplateView
 from django.utils.translation import gettext as _
 from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth.forms import AuthenticationForm
+from django.urls import reverse_lazy
+from django.contrib import messages
 
 
 class HomePageView(TemplateView):
@@ -19,7 +21,7 @@ class HomePageView(TemplateView):
 class UserLoginView(SuccessMessageMixin, LoginView):
     template_name = 'layouts/form.html'
     form_class = AuthenticationForm
-    next_page = 'home_page'
+    next_page = reverse_lazy('home_page')
     success_message = _('You are logged in')
     extra_context = {
         'title': _('Login'),
@@ -27,9 +29,9 @@ class UserLoginView(SuccessMessageMixin, LoginView):
     }
 
 
-class UserLogoutView(SuccessMessageMixin, LogoutView):
-    next_page = 'home_page'
-    success_message = _('You are logged out')
+class UserLogoutView(LogoutView):
+    next_page = reverse_lazy('home_page')
 
     def dispatch(self, request, *args, **kwargs):
+        messages.info(request, _('You are logged out'))
         return super().dispatch(request, *args, **kwargs)

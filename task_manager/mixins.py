@@ -9,11 +9,12 @@ from django.db.models import ProtectedError
 class AuthRequiredMixin(LoginRequiredMixin):
 
     auth_message = _('You are not logged in! Please log in.')
+    login_url = reverse_lazy('login')
 
     def dispatch(self, request, *args, **kwargs):
         if not request.user.is_authenticated:
             messages.error(request, self.auth_message)
-            return redirect(reverse_lazy('login'))
+            return redirect(self.login_url)
         return super().dispatch(request, *args, **kwargs)
 
 
@@ -35,7 +36,7 @@ class UserPermissionMixin(UserPassesTestMixin):
     permission_url = None
 
     def test_func(self):
-        return self.get_object() == self.request.user
+        return self.get_object().id == self.request.user.id
 
     def handle_no_permission(self):
         messages.error(self.request, self.permission_message)
@@ -48,7 +49,7 @@ class AuthorDeletionMixin(UserPermissionMixin):
     author_url = None
 
     def test_func(self):
-        return self.get_object().author == self.request.user
+        return self.get_object().author.id == self.request.user.id
 
     def handle_no_permission(self):
         messages.error(self.request, self.author_message)
