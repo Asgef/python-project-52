@@ -52,7 +52,10 @@ class UserEditView(
     def form_valid(self, form):
         response = super().form_valid(form)
         self.request.user = form.save()
-        login(self.request, self.request.user, backend='django.contrib.auth.backends.ModelBackend')
+        login(
+            self.request, self.request.user,
+            backend='django.contrib.auth.backends.ModelBackend'
+        )
         return response
 
 

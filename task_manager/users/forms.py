@@ -5,14 +5,13 @@ from django.core.validators import MinLengthValidator
 
 
 class UserForm(forms.ModelForm):
-
     passw_min_len = 3
 
     first_name = forms.CharField(
         label=_('First name'),
         widget=forms.TextInput(
             attrs={
-                'class': 'forms-control', 'placeholder': _('First_name'),
+                'class': 'form-control', 'placeholder': _('First_name'),
             }
         )
     )
@@ -21,7 +20,7 @@ class UserForm(forms.ModelForm):
         label=_('Last name'),
         widget=forms.TextInput(
             attrs={
-                'class': 'forms-control', 'placeholder': _('Last_name'),
+                'class': 'form-control', 'placeholder': _('Last_name'),
             }
         )
     )
@@ -78,8 +77,11 @@ class UserForm(forms.ModelForm):
         username = self.cleaned_data.get('username')
         user_id = self.instance.id if self.instance else None
 
-        if username and User.objects.filter(username=username).exclude(id=user_id).exists():
-            raise forms.ValidationError(_('Username already exists'), code='invalid')
+        if username and User.objects.filter(username=username) \
+                .exclude(id=user_id).exists():
+            raise forms.ValidationError(
+                _('Username already exists'), code='invalid'
+            )
 
         return username
 
