@@ -4,15 +4,15 @@
 {% block title %}{{ title }}{% endblock %}
 
 {% block content %}
-    <div class="container my-5">
-      <div class="position-relative p-5 text-center text-muted bg-body border border-dashed rounded-5">
-        <svg class="bi mt-5 mb-3" width="48" height="48"><use xlink:href="#check2-circle"></use></svg>
-        <h1 class="text-body-emphasis">{{greeting}}</h1>
-        <p class="col-lg-6 mx-auto mb-4">
+    <div class="card">
+      <div class="card-body p-5 bg-light">
+
+        <h1 class="display-4">{{greeting}}</h1>
+        <p class="lead">
           {{ description }}
         </p>
         <hr>
-        <a href='https://ru.hexlet.io' class="btn btn-primary px-5 mb-5" role="button">
+        <a href='https://ru.hexlet.io' class="btn btn-primary btn-lg" role="button">
           {{ invitation_button }}
         </a>
       </div>

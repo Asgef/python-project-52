@@ -1,4 +1,8 @@
 {% load django_bootstrap5 %}
+
+{% bootstrap_css %}
+{% bootstrap_javascript %}
+
 {% load i18n %}
 {% get_current_language as LANGUAGE_CODE %}
 
@@ -16,10 +20,12 @@
     </header>
 
 
-    <main class="container wrapper flex-grow-1">
+    <div class="container wrapper flex-grow-1">
+      <h1 class="my-4"></h1>
+      <h1 class="my-4"></h1>
       {% bootstrap_messages %}
       {% block content %}{% endblock %}
-    </main>
+    </div>
 
           <p>User: {{ user }}</p>
 <!--Show user status-->
