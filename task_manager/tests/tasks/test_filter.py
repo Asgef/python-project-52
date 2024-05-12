@@ -1,5 +1,4 @@
 from django.urls import reverse
-from task_manager.users.models import User
 from .tests_tasks import TaskTestCase
 
 
@@ -35,5 +34,3 @@ class TestFilterTasks(TaskTestCase):
         expected_names = ['Initial Task', 'Second Task']
 
         self.assertEqual(sorted(task_names), sorted(expected_names))
-
-
