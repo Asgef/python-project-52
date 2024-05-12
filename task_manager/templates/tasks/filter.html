@@ -1,16 +1,16 @@
 {% load django_bootstrap5 %}
 <div class = "card mb-3">
 
-    <div class = "container my-3">
-           <form method="get">
+    <div class = "card-body bg-light">
+        <form class="form-inline center" method="get">
                {% for field in filter.form %}
-               <div class="form-group">
-                    {% bootstrap_field field %}
-                   </div>
-                    {% endfor %}
-                   <div class="form-group">
-                         {% bootstrap_button select button_type="submit" button_class="mt-3 btn btn-primary" %}
+               <div class="mb-3">
+                   {% bootstrap_field field %}
                </div>
-           </form>
+                    {% endfor %}
+
+                   {% bootstrap_button button_text button_type="submit" button_class="btn btn-primary" %}
+
+        </form>
     </div>
 </div>
