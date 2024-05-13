@@ -1,46 +1,63 @@
 {% extends "layouts/base.html" %}
 {% load i18n %}
 
-{% block title %}{% translate "Task Manager" %} Hexlet{% endblock %}
+{% block title %}{% translate "Task Manager Hexlet" %}{% endblock %}
 
 {% block content %}
-    <div class="container wrapper flex-grow-1">
+<h1 class="my-4">{{ title }}</h1>
 
-      <h1 class="my-4">{{ title }}</h1>
+    <div class="card">
+        <div class="card-header bg-secondary text-white">
+            <h2>{{ task.name }}</h2>
+        </div>
 
-      <a class="btn btn-primary mb-3" href="{% url 'task_add' %}">{% trans 'Create task' %}</a>
+        <div class="card-body bg-light">
+            <p>{{ task.description }}</p>
 
+            <hr>
 
+            <div class="container">
 
-        <table class="table table-striped">
-          <thead class="thead-dark">
-            <tr>
-              <th>ID</th>
-              <th>{% translate "Name" %}</th>
-              <th>{% translate "Status" %}</th>
-              <th>{% translate "Author" %}</th>
-              <th>{% translate "Executor" %}</th>
-              <th>{% translate "Creation date" %}</th>
-            </tr>
-          </thead>
-          <tbody>
-          {% for task in tasks %}
-              <tr>
-                <td>{{ task.id }}</td>
-                <td>{{ task.name }}</td>
-                <td>{{ task.status }}</td>
-                <td>{{ task.author }}</td>
-                <td>{{ task.executor }}</td>
-                <td>{{ task.created_at|date:"d.m.Y H:i" }}</td>
-                <td>
-                  <a href="{% url 'task_update' task.id %}">{% translate "Edit" %}</a>
-                  <br>
-                  <a href="{% url 'task_delete' task.id %}">{% translate "Delete" %}</a>
-                </td>
-              </tr>
-          {% endfor %}
-          </tbody>
-        </table>
+                <div class="row p-1">
+                    <div class="col">{% translate 'Author' %}</div>
+                    <div class="col">{{ task.author }}</div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col">{% translate 'Executor' %}</div>
+                    <div class="col">{{ task.executor }}</div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col">{% translate 'Status' %}</div>
+                    <div class="col">{{ task.status }}</div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col">{% translate 'Creation date' %}</div>
+                    <div class="col">{{ task.created_at|date:"d.m.Y H:i" }}</div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col">
+                        <h6>{% translate 'Labels' %}:</h6>
+                        <ul>
+                            {% for label in task.label.all %}
+                                <li>{{  label.name }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row p-1">
+                    <div class="col">
+                        <a href="{% url 'task_update' task.id %}">{% trans 'Update' %}</a>
+                        <br>
+                        <a href="{% url 'task_delete' task.id %}">{% trans 'Delete' %}</a>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
 {% endblock %}

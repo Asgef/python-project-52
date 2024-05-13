@@ -1,5 +1,4 @@
 from task_manager.mixins import AuthRequiredMixin, AuthorDeletionMixin
-from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from django.utils.translation import gettext_lazy as _
 from .models import Task
 from .forms import TaskForm
@@ -8,6 +7,9 @@ from django.urls import reverse_lazy
 from task_manager.users.models import User
 from .filters import TaskFilter
 from django_filters.views import FilterView
+from django.views.generic import (
+    ListView, CreateView, UpdateView, DeleteView, DetailView
+)
 
 
 class TasksListView(AuthRequiredMixin, FilterView, ListView):
@@ -18,6 +20,15 @@ class TasksListView(AuthRequiredMixin, FilterView, ListView):
     extra_context = {
         'title': _('Tasks'),
         'button_text': _('Show')
+    }
+
+
+class TaskShowView(AuthRequiredMixin, DetailView):
+    model = Task
+    template_name = 'tasks/task_show.html'
+    context_object_name = 'task'
+    extra_context = {
+        'title': _('View a task')
     }
 
 
