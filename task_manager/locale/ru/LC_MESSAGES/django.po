@@ -226,7 +226,7 @@ msgstr "Удалить"
 
 #: task_manager/templates/layouts/navbar.html:4
 msgid "Task Manager"
-msgstr "Менеджер задачь"
+msgstr "Менеджер задач"
 
 #: task_manager/templates/layouts/delete.html:13
 msgid "Are you sure you want to delete"

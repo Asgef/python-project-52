@@ -7,43 +7,40 @@
     <span class="navbar-toggler-icon"></span>
   </button>
 
-  <div class="collapse navbar-collapse" id="navbarToggleExternalContent">
+  <div class="navbar-collapse collapse show" id="navbarToggleExternalContent" style>
     <ul class="navbar-nav mr-auto">
 
       <li class="nav-item">
         <a class="nav-link" href="{% url 'users' %}">{% translate "Users" %}</a>
       </li>
 
-    </ul>
+      {% if user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'statuses' %}">{% translate "Statuses" %}</a>
+      </li>
 
-    <ul class="navbar-nav">
-        {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'statuses' %}">{% translate "Statuses" %}</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'labels' %}">{% translate "Labels" %}</a>
+      </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'labels' %}">{% translate "Labels" %}</a>
-        </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'tasks' %}">{% translate "Tasks" %}</a>
+      </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'tasks' %}">{% translate "Tasks" %}</a>
-        </li>
+      <form action="{% url 'logout' %}" method="post">
+        {% csrf_token %}
+        <button type="submit" class="nav-link" style="border: none; background: none; text-decoration: none;">{% translate "Log Out" %}</button>
+      </form>
+      {% else %}
 
-        <form action="{% url 'logout' %}" method="post">
-          {% csrf_token %}
-          <button type="submit" class="nav-link" style="border: none; background: none; text-decoration: none;">{% translate "Log Out" %}</button>
-        </form>
-        {% else %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'login' %}">{% translate "Log in" %}</a>
+      </li>
 
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'login' %}">{% translate "Log in" %}</a>
-        </li>
-
-        <li class="nav-item">
-          <a class="nav-link" href="{% url 'create' %}">{% translate "Sign up" %}</a>
-        </li>
-        {% endif %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'create' %}">{% translate "Sign up" %}</a>
+      </li>
+      {% endif %}
 
     </ul>
   </div>
