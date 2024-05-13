@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
         label=_('First name'),
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control', 'placeholder': _('First_name'),
+                'placeholder': _('First_name'),
             }
         )
     )
@@ -20,7 +20,7 @@ class UserForm(forms.ModelForm):
         label=_('Last name'),
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control', 'placeholder': _('Last_name'),
+                'placeholder': _('Last_name'),
             }
         )
     )
@@ -29,7 +29,7 @@ class UserForm(forms.ModelForm):
         label=_('Username'),
         widget=forms.TextInput(
             attrs={
-                'class': 'form-control', 'placeholder': _('Username'),
+                'placeholder': _('Username'),
                 'title': _('Not an option')
             }
         )
@@ -42,7 +42,7 @@ class UserForm(forms.ModelForm):
         label=_('Password'),
         widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control', 'placeholder': _('Password'),
+                'placeholder': _('Password'),
                 'title': _('Password must contains at least 3 chars')
             }
         )
@@ -54,7 +54,6 @@ class UserForm(forms.ModelForm):
         ],
         widget=forms.PasswordInput(
             attrs={
-                'class': 'form-control',
                 'placeholder': _('Password confirmation'),
                 'title': _('Please, type your password again'),
             }
