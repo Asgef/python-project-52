@@ -11,7 +11,7 @@ class UserForm(forms.ModelForm):
         label=_('First name'),
         widget=forms.TextInput(
             attrs={
-                'placeholder': _('First_name'),
+                'placeholder': _('First name'),
             }
         )
     )
@@ -20,19 +20,19 @@ class UserForm(forms.ModelForm):
         label=_('Last name'),
         widget=forms.TextInput(
             attrs={
-                'placeholder': _('Last_name'),
+                'placeholder': _('Last name'),
             }
         )
     )
 
     username = forms.CharField(
         label=_('Username'),
-        widget=forms.TextInput(
-            attrs={
-                'placeholder': _('Username'),
-                'title': _('Not an option')
-            }
-        )
+        widget=forms.TextInput(attrs={
+            'placeholder': _('Username'),
+        }),
+        help_text=_('Obligatory field. No more than 150 characters. '
+                    'Only letters, numbers and symbols @/./+/-/_.'
+                    ),
     )
 
     password1 = forms.CharField(
@@ -40,24 +40,21 @@ class UserForm(forms.ModelForm):
             MinLengthValidator(passw_min_len, _("Password is too short")),
         ],
         label=_('Password'),
-        widget=forms.PasswordInput(
-            attrs={
-                'placeholder': _('Password'),
-                'title': _('Password must contains at least 3 chars')
-            }
-        )
+        widget=forms.PasswordInput(attrs={
+            'placeholder': _('Password'),
+        }),
+        help_text=f"<ul><li>{_('Password must contains at least 3 chars')}"
+                  "</li></ul>"
     )
     password2 = forms.CharField(
         label=_('Password confirmation'),
         validators=[
             MinLengthValidator(passw_min_len, _("Password is too short")),
         ],
-        widget=forms.PasswordInput(
-            attrs={
-                'placeholder': _('Password confirmation'),
-                'title': _('Please, type your password again'),
-            }
-        )
+        widget=forms.PasswordInput(attrs={
+            'placeholder': _('Password confirmation')
+        }),
+        help_text=_('Please, type your password again')
     )
 
     class Meta:
