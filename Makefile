@@ -18,8 +18,8 @@ migrate:
 	${MANAGE} migrate
 
 build:
-	migrate
-	staticfiles
+	make migrate
+	make staticfiles
 
 test:
 	poetry run python3 manage.py test
