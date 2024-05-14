@@ -1,9 +1,20 @@
 [tool.poetry]
 name = "hexlet-code"
 version = "0.1.0"
-description = ""
+description = "Task manager - a web application designed for organizing and managing tasks."
+classifiers = [
+    "Environment :: Web Environment",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python",
+    "Framework :: Django :: 5.0",
+    "Topic :: Internet :: WWW/HTTP :: Dynamic Content",
+    "Topic :: Office/Business :: Scheduling"
+]
 authors = ["Asgef <asgefes1@gmail.com>"]
 readme = "README.md"
+packages = [
+    {include = "task_manager"}
+]
 
 [tool.poetry.dependencies]
 python = "^3.11"
@@ -15,6 +26,7 @@ django-bootstrap5 = "^24.2"
 whitenoise = "^6.6.0"
 django-filter = "^24.2"
 rollbar = "^1.0.0"
+gunicorn = "^22.0.0"
 
 
 [tool.poetry.group.dev.dependencies]
