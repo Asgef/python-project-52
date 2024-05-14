@@ -1,0 +1,20 @@
+{% extends "layouts/base.html" %}
+{% load django_bootstrap5 %}
+{% load i18n %}
+
+{% block title %}{% translate 'Task Manager Hexlet' %}{% endblock %}
+
+{% block content %}
+    <div class="card">
+        <div class="card-body p-5 bg-light">
+            <h1 class="display-4">{% translate 'Not Found' %}</h1>
+            <p class="lead">{% translate 'This is not what you are looking for' %}</p>
+
+            <hr>
+
+            <a class="btn btn-primary btn-lg" role="button" href="{% url 'home_page' %}">
+                {% translate 'Back to the home page' %}
+            </a>
+        </div>
+    </div>
+{% endblock content %}
