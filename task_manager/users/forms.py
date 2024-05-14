@@ -1,6 +1,6 @@
 from django import forms
-from django.utils.translation import gettext as _
 from .models import User
+from django.utils.translation import gettext as _
 from django.core.validators import MinLengthValidator
 
 

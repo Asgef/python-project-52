@@ -1,16 +1,13 @@
-from django.contrib.auth import login
-from django.views.generic import ListView, CreateView, DeleteView, UpdateView
-from django.contrib.messages.views import SuccessMessageMixin
-from django.utils.translation import gettext as _
-from .forms import UserForm
 from .models import User
+from .forms import UserForm
 from django.urls import reverse_lazy
+from django.contrib.auth import login
+from django.utils.translation import gettext as _
+from django.contrib.messages.views import SuccessMessageMixin
+from django.views.generic import ListView, CreateView, DeleteView, UpdateView
 from task_manager.mixins import (
     AuthRequiredMixin, UserPermissionMixin, DeleteProtectionMixin
 )
-# import logging
-#
-# logger = logging.getLogger('main')
 
 
 class UsersListView(ListView):

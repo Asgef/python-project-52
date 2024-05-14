@@ -1,10 +1,10 @@
-from django_filters import FilterSet, ModelChoiceFilter, BooleanFilter
 from .models import Task
-from django.utils.translation import gettext_lazy as _
-from task_manager.statuses.models import Status
+from django.forms import CheckboxInput
 from task_manager.users.models import User
 from task_manager.labels.models import Label
-from django.forms import CheckboxInput
+from task_manager.statuses.models import Status
+from django.utils.translation import gettext_lazy as _
+from django_filters import FilterSet, ModelChoiceFilter, BooleanFilter
 
 
 class TaskFilter(FilterSet):

@@ -1,9 +1,7 @@
 from django.urls import path
 from task_manager.users.views import (
-    UsersListView,
-    UserRegisterView,
-    UserEditView,
-    UserDeleteView
+    UsersListView, UserRegisterView,
+    UserEditView, UserDeleteView
 )
 
 
