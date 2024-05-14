@@ -1,11 +1,23 @@
-from task_manager.users.models import User
-from django.urls import reverse_lazy
+import os
+import json
 from django.test import TestCase
+from django.urls import reverse_lazy
+from task_manager.users.models import User
 from task_manager.tasks.models import Task
 
 
 class TaskTestCase(TestCase):
     fixtures = ['task.json']
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        fixture = os.path.join(
+            os.path.dirname(__file__), os.path.pardir,
+            'fixtures', 'task_data.json'
+        )
+        with open(fixture, 'r') as file:
+            cls.task_data = json.load(file)
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
@@ -13,13 +25,6 @@ class TaskTestCase(TestCase):
 
 
 class TestAddTask(TaskTestCase):
-
-    data = {
-        'name': "New test task",
-        'description': 'Description new test task',
-        'status': 1,
-        'executor': 1
-    }
 
     def test_open_without_login(self):
         self.client.logout()
@@ -29,24 +34,19 @@ class TestAddTask(TaskTestCase):
     def test_create_status(self):
         initial_count = Task.objects.count()
         response = self.client.post(
-            reverse_lazy('task_add'), self.data
+            reverse_lazy('task_add'), self.task_data[0]
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(Task.objects.count(), initial_count + 1)
 
         new_status = Task.objects.latest('id')
-        self.assertEqual(new_status.name, self.data['name'])
-        self.assertEqual(new_status.description, self.data['description'])
+        self.assertEqual(new_status.name, self.task_data[0]['name'])
+        self.assertEqual(
+            new_status.description, self.task_data[0]['description']
+        )
 
 
 class TestUpdateTasks(TaskTestCase):
-
-    data = {
-        'name': "Updated test task",
-        'description': 'Description updated test task',
-        'status': 1,
-        'executor': 1
-    }
 
     def test_update_without_login(self):
         self.client.logout()
@@ -64,13 +64,15 @@ class TestUpdateTasks(TaskTestCase):
 
         response = self.client.post(
             reverse_lazy(
-                'task_update', kwargs={'pk': 1}), self.data
+                'task_update', kwargs={'pk': 1}), self.task_data[1]
         )
         self.assertEqual(response.status_code, 302)
 
         updated_status = Task.objects.get(pk=1)
-        self.assertEqual(updated_status.name, self.data['name'])
-        self.assertEqual(updated_status.description, self.data['description'])
+        self.assertEqual(updated_status.name, self.task_data[1]['name'])
+        self.assertEqual(
+            updated_status.description, self.task_data[1]['description']
+        )
 
 
 class TestDeleteTask(TaskTestCase):

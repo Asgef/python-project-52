@@ -1,10 +1,22 @@
-from task_manager.users.models import User
-from django.urls import reverse_lazy
+import os
+import json
 from django.test import TestCase
+from django.urls import reverse_lazy
+from task_manager.users.models import User
 
 
 class UserTestCase(TestCase):
     fixtures = ['user.json']
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        fixture = os.path.join(
+            os.path.dirname(__file__), os.path.pardir,
+            'fixtures', 'user_data.json'
+        )
+        with open(fixture, 'r') as file:
+            cls.user_data = json.load(file)
 
     def setUp(self):
         self.user = User.objects.get(pk=1)
@@ -12,13 +24,6 @@ class UserTestCase(TestCase):
 
 
 class TestCreateUser(UserTestCase):
-    data = {
-        'username': 'test_user',
-        'password1': 'testpassword123',
-        'password2': 'testpassword123',
-        'first_name': 'Test',
-        'last_name': 'User',
-    }
 
     def test_open_without_login(self):
         self.client.logout()
@@ -28,25 +33,18 @@ class TestCreateUser(UserTestCase):
     def test_create_status(self):
         initial_count = User.objects.count()
         response = self.client.post(
-            reverse_lazy('create'), self.data
+            reverse_lazy('create'), self.user_data
         )
         self.assertEqual(response.status_code, 302)
         self.assertEqual(User.objects.count(), initial_count + 1)
 
         new_user = User.objects.latest('id')
-        self.assertEqual(new_user.username, 'test_user')
-        self.assertEqual(new_user.first_name, 'Test')
-        self.assertEqual(new_user.last_name, 'User')
+        self.assertEqual(new_user.username, self.user_data['username'])
+        self.assertEqual(new_user.first_name, self.user_data['first_name'])
+        self.assertEqual(new_user.last_name, self.user_data['last_name'])
 
 
 class TestUpdateUser(UserTestCase):
-    data = {
-        'username': 'test_user',
-        'password1': 'testpassword123',
-        'password2': 'testpassword123',
-        'first_name': 'Test',
-        'last_name': 'User',
-    }
 
     def test_update_without_login(self):
         self.client.logout()
@@ -64,14 +62,14 @@ class TestUpdateUser(UserTestCase):
 
         response = self.client.post(
             reverse_lazy(
-                'user_edit', kwargs={'pk': 1}), self.data
+                'user_edit', kwargs={'pk': 1}), self.user_data
         )
         self.assertEqual(response.status_code, 302)
 
         updated_user = User.objects.get(pk=1)
-        self.assertEqual(updated_user.username, 'test_user')
-        self.assertEqual(updated_user.first_name, 'Test')
-        self.assertEqual(updated_user.last_name, 'User')
+        self.assertEqual(updated_user.username, self.user_data['username'])
+        self.assertEqual(updated_user.first_name, self.user_data['first_name'])
+        self.assertEqual(updated_user.last_name, self.user_data['last_name'])
 
 
 class TestDeleteUser(UserTestCase):
