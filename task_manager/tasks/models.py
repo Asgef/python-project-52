@@ -24,9 +24,9 @@ class Task(models.Model):
     created_at = models.DateTimeField(
         auto_now_add=True, verbose_name=_('Creation date')
     )
-    label = models.ManyToManyField(
+    labels = models.ManyToManyField(
         Label, through='TaskLabelRelation', through_fields=('task', 'label'),
-        blank=True, verbose_name=_('Label')
+        blank=True, verbose_name=_('Labels')
     )
 
     def __str__(self):

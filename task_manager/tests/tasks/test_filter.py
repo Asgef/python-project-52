@@ -21,7 +21,7 @@ class TestFilterTasks(TaskTestCase):
         self.assertEqual(sorted(task_names), sorted(expected_names))
 
     def test_filter_by_label(self):
-        response = self.client.get(reverse('tasks'), {'label': 3})
+        response = self.client.get(reverse('tasks'), {'labels': 3})
         self.assertEqual(response.status_code, 200)
         task_names = [task.name for task in response.context['tasks']]
         expected_names = ['Second Task', 'Third Task']
