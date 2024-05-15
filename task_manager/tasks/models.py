@@ -10,7 +10,9 @@ class Task(models.Model):
         max_length=150, unique=True, blank=False, verbose_name=_('Name')
     )
     description = models.TextField(blank=True, verbose_name=_('Description'))
-    status = models.ForeignKey(Status, on_delete=models.PROTECT)
+    status = models.ForeignKey(
+        Status, on_delete=models.PROTECT, verbose_name=_('Status')
+    )
     author = models.ForeignKey(
         User, on_delete=models.PROTECT, related_name='author',
         verbose_name=_('Author')
@@ -32,6 +34,7 @@ class Task(models.Model):
 
     class Meta:
         verbose_name = _('Task')
+        verbose_name_plural = _('Tasks')
 
 
 class TaskLabelRelation(models.Model):

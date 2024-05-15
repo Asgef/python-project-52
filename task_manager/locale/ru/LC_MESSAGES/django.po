@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-05-14 21:58+0300\n"
+"POT-Creation-Date: 2024-05-15 16:02+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,7 +29,7 @@ msgid "Name"
 msgstr "Имя"
 
 #: task_manager/labels/models.py:10 task_manager/statuses/models.py:10
-#: task_manager/tasks/models.py:23 task_manager/templates/labels/labels.html:19
+#: task_manager/tasks/models.py:25 task_manager/templates/labels/labels.html:19
 #: task_manager/templates/statuses/statuses.html:19
 #: task_manager/templates/tasks/task_show.html:37
 #: task_manager/templates/tasks/tasks.html:23
@@ -38,7 +38,7 @@ msgid "Creation date"
 msgstr "Дата создания"
 
 #: task_manager/labels/models.py:17 task_manager/tasks/filters.py:19
-#: task_manager/tasks/models.py:27
+#: task_manager/tasks/models.py:29
 msgid "Label"
 msgstr "Метка"
 
@@ -96,12 +96,13 @@ msgid "You are not logged in! Please log in."
 msgstr "Вы не авторизованы! Пожалуйста, выполните вход."
 
 #: task_manager/statuses/models.py:17 task_manager/tasks/filters.py:13
+#: task_manager/tasks/models.py:14
 #: task_manager/templates/tasks/task_show.html:32
 #: task_manager/templates/tasks/tasks.html:20
 msgid "Status"
 msgstr "Статус"
 
-#: task_manager/statuses/views.py:15
+#: task_manager/statuses/models.py:18 task_manager/statuses/views.py:15
 #: task_manager/templates/layouts/navbar.html:19
 msgid "Statuses"
 msgstr "Статусы"
@@ -135,7 +136,7 @@ msgstr "Невозможно удалить статус, потому что о
 msgid "Delete status"
 msgstr "Удаление статуса"
 
-#: task_manager/tasks/filters.py:16 task_manager/tasks/models.py:20
+#: task_manager/tasks/filters.py:16 task_manager/tasks/models.py:22
 #: task_manager/templates/tasks/task_show.html:27
 #: task_manager/templates/tasks/tasks.html:22
 msgid "Executor"
@@ -149,17 +150,18 @@ msgstr "Только свои задачи"
 msgid "Description"
 msgstr "Описание"
 
-#: task_manager/tasks/models.py:16
+#: task_manager/tasks/models.py:18
 #: task_manager/templates/tasks/task_show.html:22
 #: task_manager/templates/tasks/tasks.html:21
 msgid "Author"
 msgstr "Автор"
 
-#: task_manager/tasks/models.py:34
+#: task_manager/tasks/models.py:36
 msgid "Task"
 msgstr "Задача"
 
-#: task_manager/tasks/views.py:21 task_manager/templates/layouts/navbar.html:27
+#: task_manager/tasks/models.py:37 task_manager/tasks/views.py:21
+#: task_manager/templates/layouts/navbar.html:27
 msgid "Tasks"
 msgstr "Задачи"
 
