@@ -255,6 +255,7 @@ msgid "Log Out"
 msgstr "Выход"
 
 #: task_manager/templates/layouts/navbar.html:37
+msgctxt "login"
 msgid "Log in"
 msgstr "Вход"
 
