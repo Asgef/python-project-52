@@ -1,5 +1,10 @@
 <div align="center">
 
+<p align="center">
+ <img width="500px" src="task_manager_logo.png" alt="qr"/>
+</p>
+
+
   <h1>Hexlet project: Task Manager</h1>
 
   [A simple web application for managing team tasks](https://python-project-52-glfi.onrender.com/)
