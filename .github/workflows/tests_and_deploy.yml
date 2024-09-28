@@ -57,4 +57,5 @@ jobs:
           DEBUG: ${{ secrets.DEBUG }}
           POST_SERVER_ITEM_ACCESS_TOKEN: ${{ secrets.POST_SERVER_ITEM_ACCESS_TOKEN }}
         run: |
+          cd ansible
           ansible-playbook -i hosts.ini make_deploy.yml

@@ -30,7 +30,8 @@
         target: build
 
     - name: Stop project
-      ansible.builtin.shell: pkill -f '7000 task_manager.wsgi'
+      community.general.make:
+        target: stop
       ignore_errors: yes
 
     - name: Start project
