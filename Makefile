@@ -5,7 +5,7 @@ install:
 	poetry install
 
 start:
-	poetry run gunicorn -w 5 -b 0.0.0.0:8000 task_manager.wsgi
+	poetry run gunicorn -w 5 -b 0.0.0.0:7000 task_manager.wsgi
 
 lint:
 	poetry run flake8 task_manager --exclude migrations

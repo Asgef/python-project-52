@@ -1,0 +1,39 @@
+---
+- hosts: webservers
+  gather_facts: no
+  vars:
+    project_name: python-project-52
+    user: "{{ ansible_user }}"
+    secret_key: "{{ lookup('env', 'SECRET_KEY') }}"
+    database_url: "{{ lookup('env', 'DATABASE_URL') }}"
+    debug: "{{ lookup('env', 'DEBUG') }}"
+    post_server_item_access_token: "{{ lookup('env', 'POST_SERVER_ITEM_ACCESS_TOKEN') }}"
+
+  tasks:
+    - name: Ensure the latest code is pulled from GitHub
+      git:
+      # Для публичных репозиториев можно использовать http
+      # что бы не добавлять ssh ключи на сервер
+        repo: "https://github.com/Asgef/{{ project_name }}.git"
+        dest: "/home/{{ user }}/{{ project_name }}"
+        version: main
+        update: yes
+      
+    - name: Add .env file
+      ansible.builtin.template:
+        src: ".env.j2"
+        dest: "/home/{{ user }}/{{ project_name }}/.env"
+
+    - name: Build project
+      community.general.make:
+        chdir: "/home/{{ user }}/{{ project_name }}"
+        target: build
+
+    - name: Stop project
+      ansible.builtin.shell: pkill -f '7000 task_manager.wsgi'
+      ignore_errors: yes
+
+    - name: Start project
+      community.general.make:
+        chdir: "/home/{{ user }}/{{ project_name }}"
+        target: start
