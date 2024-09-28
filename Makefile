@@ -1,14 +1,15 @@
 MANAGE := poetry run python3 manage.py
+PORT ?= 7000
 
 
 install:
 	poetry install
 
 start:
-	poetry run gunicorn -w --daemon --bind 0.0.0.0:7000 --timeout 5 -b 0.0.0.0:7000 task_manager.wsgi
+	poetry run gunicorn --daemon -w $(nproc) -b 0.0.0.0:$(PORT) task_manager.wsgi
 
 stop:
-	pkill -f '7000 task_manager.wsgi'
+	pkill -f '$(PORT) task_manager.wsgi'
 
 lint:
 	poetry run flake8 task_manager --exclude migrations
