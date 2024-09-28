@@ -1,12 +1,13 @@
 MANAGE := poetry run python3 manage.py
 PORT ?= 7000
-
+WORKERS ?= $(shell nproc)
+.PHONY: install start stop lint shell migrate build test test-coverage staticfiles
 
 install:
 	poetry install
 
 start:
-	poetry run gunicorn --daemon -w $(nproc) -b 0.0.0.0:$(PORT) task_manager.wsgi
+	poetry run gunicorn --daemon -w $(WORKERS) -b 0.0.0.0:$(PORT) task_manager.wsgi
 
 stop:
 	pkill -f '$(PORT) task_manager.wsgi'
