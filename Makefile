@@ -1,6 +1,6 @@
 MANAGE := poetry run python3 manage.py
 PORT ?= 7000
-WORKERS ?= $(shell nproc)
+WORKERS ?= 5
 .PHONY: install start stop lint shell migrate build test test-coverage staticfiles
 
 install:
